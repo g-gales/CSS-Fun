@@ -8,20 +8,28 @@ const Ghosts = () => {
           <div
             className="ghost ghost1"
             style={{ "--d": `${(Math.random() * 1.5 + 0.5).toFixed(2)}s` }}>
-            <div className="ghost-body">
-              <div className="ghost1-eyes">
-                <div className="ghost-eye left"></div>
-                <div className="ghost-eye right"></div>
+            <div className="ghost-float">
+              <div className="ghost-shell">
+                <div className="ghost-body">
+                  <div className="ghost1-eyes">
+                    <div className="ghost-eye left"></div>
+                    <div className="ghost-eye right"></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           <div
             className="ghost ghost2"
             style={{ "--d": `${(Math.random() * 1.5 + 0.5).toFixed(2)}s` }}>
-            <div className="ghost-body">
-              <div className="ghost2-eyes">
-                <div className="ghost-eye left"></div>
-                <div className="ghost-eye right"></div>
+            <div className="ghost-float">
+              <div className="ghost-shell">
+                <div className="ghost-body">
+                  <div className="ghost2-eyes">
+                    <div className="ghost-eye left"></div>
+                    <div className="ghost-eye right"></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

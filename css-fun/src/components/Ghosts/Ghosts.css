@@ -29,18 +29,29 @@
   z-index: 1;
 }
 
-.ghost1,
-.ghost2 {
+.ghost {
   position: absolute;
   top: 23%;
   width: 67px;
   height: 100px;
+}
+
+.ghost-float {
+  width: 100%;
+  height: 100%;
+  animation: bob 2s ease-in-out var(--d) infinite;
+}
+
+.ghost-shell {
+  width: 100%;
+  height: 100%;
   background: #fff;
   border: solid 4px #673c63;
-  border-bottom: 0px;
-  border-right: 0px;
+  border-bottom: 0;
+  border-right: 0;
   border-radius: 30px 30px 0 0;
-  box-shadow: 4px 0px 0px #95c6f2 inset;
+  box-shadow: 4px 0 0 #95c6f2 inset;
+
   --mask:
     radial-gradient(5px at 50% calc(100% - 5px), #000 99%, #0000 101%)
       calc(50% - 10px) 0/20px 100%,
@@ -48,27 +59,27 @@
       calc(100% - 5px)/20px 100% repeat-x;
   -webkit-mask: var(--mask);
   mask: var(--mask);
+
+  transform-origin: center;
+  animation: ghost-story 14s linear infinite;
 }
 
 .ghost1 {
   left: 0;
-  opacity: 0;
-  animation:
-    bob 2s ease-in-out var(--d) infinite,
-    ghost1-scared 14s linear infinite;
+  transform: scaleX(-1);
 }
-
 .ghost2 {
   right: 0;
-  animation:
-    bob 2s ease-in-out var(--d) infinite,
-    ghost2-scared 14s linear infinite;
+}
+
+.ghost2 .ghost-shell {
+  animation-delay: -7s;
 }
 
 .ghost1-eyes,
 .ghost2-eyes {
   position: absolute;
-  left: 48%;
+  left: 35%;
   top: 0%;
   width: 35px;
   height: 30px;
@@ -83,6 +94,15 @@
   border-radius: 100%;
   background: #673c63;
   transform: translate(-50%, -50%);
+  transform-origin: center;
+}
+
+.ghost .ghost-eye {
+  animation: scared-eyes 14s linear infinite;
+}
+
+.ghost2 .ghost-eye {
+  animation-delay: -7s;
 }
 
 .ghost-eye.left {
@@ -103,85 +123,9 @@
   }
 }
 
-@keyframes ghost1-scared {
+@keyframes ghost-story {
   0%,
-  1% {
-    opacity: 0;
-  }
-  11% {
-    opacity: 1;
-  }
-  22% {
-    border: solid 4px #673c63;
-    border-bottom: 0px;
-    border-right: 0px;
-    box-shadow: 4px 0px 0px #95c6f2 inset;
-  }
-  30% {
-    border: solid 4px #673c63;
-    border-bottom: 0px;
-    border-right: 0px;
-    box-shadow: 4px 0px 0px #95c6f2 inset;
-  }
-  35% {
-    border-left: 0px;
-    border-right: 4px solid #673c63;
-    box-shadow: -4px 0px 0px #95c6f2 inset;
-  }
-  57% {
-    border-left: 0px;
-    border-right: 4px solid #673c63;
-    box-shadow: -4px 0px 0px #95c6f2 inset;
-  }
-
-  62% {
-    border-left: solid 4px #673c63;
-    border-right: 0px;
-    box-shadow: 4px 0px 0px #95c6f2 inset;
-  }
-  64% {
-    transform: scale(1);
-  }
-  65% {
-    background-color: #fff;
-    transform: scale(1.11);
-  }
-  66% {
-    transform: scale(1.15);
-    background-color: #e67878;
-    border-left: solid 4px #673c63;
-    border-right: 0px;
-    box-shadow: 4px 0px 0px #e23b3b inset;
-    opacity: 1;
-  }
-  69% {
-    transform: scale(1);
-    opacity: 0;
-  }
-  71% {
-    background-color: #e67878;
-    border-left: solid 4px #673c63;
-    border-right: 0px;
-    box-shadow: 4px 0px 0px #e23b3b inset;
-  }
-  80% {
-    opacity: 0;
-    background-color: #fff;
-    border-right: 0px;
-    border-left: 4px solid #673c63;
-    box-shadow: -4px 0px 0px #95c6f2 inset;
-  }
-  100% {
-    opacity: 0;
-    border-right: 0px;
-    border-left: 4px solid #673c63;
-    box-shadow: -4px 0px 0px #95c6f2 inset;
-  }
-}
-
-@keyframes ghost2-scared {
-  0%,
-  7% {
+  10% {
     border: solid 4px #673c63;
     border-bottom: 0px;
     border-right: 0px;
@@ -233,14 +177,50 @@
   61% {
     opacity: 1;
   }
-  80% {
+  77% {
     border-left: 0px;
     border-right: 4px solid #673c63;
     box-shadow: -4px 0px 0px #95c6f2 inset;
   }
-  85% {
+  80% {
     border-right: 0px;
     border-left: 4px solid #673c63;
     box-shadow: 4px 0px 0px #95c6f2 inset;
+  }
+}
+
+@keyframes scared-eyes {
+  0%,
+  12% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    filter: none;
+  }
+  14% {
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+
+  /* peak scare: widen + tiny shake */
+  16% {
+    transform: translate(calc(-50% + 1px), calc(-50% - 1px)) scale(1.8, 1.2);
+  }
+  17% {
+    transform: translate(calc(-50% - 1px), calc(-50% + 1px)) scale(1.8, 1.2);
+  }
+  18% {
+    transform: translate(-50%, -50%) scale(1.8, 1.2);
+  }
+
+  /* fade with the vanish */
+  19%,
+  50% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+
+  61%,
+  100% {
+    opacity: 1;
+    filter: none;
   }
 }
