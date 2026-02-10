@@ -1,0 +1,110 @@
+.firefly-card {
+  position: relative;
+  width: 600px;
+  height: 350px;
+  border: solid 2px #673c63;
+  border-radius: 16px;
+  background-color: #0f140e;
+}
+
+.firefly-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #f9d71c;
+  margin: 2rem 0 0;
+}
+
+.swarm {
+  position: relative;
+  width: 400px;
+  height: 240px;
+  margin: 0px auto;
+}
+
+.pivot {
+  display: none;
+  opacity: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y)));
+  transition:
+    display 0.5s allow-discrete,
+    opacity 0.5s linear;
+}
+
+.swarm:hover .pivot {
+  display: block;
+  opacity: 1;
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+.firefly {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  transform: translateX(var(--r));
+  background-color: #f9d71c;
+  border-radius: 999px;
+  box-shadow:
+    0 0 10px #f9d71c,
+    0 0 20px #f9d71c,
+    0 0 30px #f9d71c;
+
+  animation:
+    blink 1.6s ease-in-out var(--d) infinite,
+    fig8 var(--s) linear calc(-1 * var(--d)) infinite;
+}
+
+@keyframes fig8 {
+  0% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(calc(0.8 * var(--ax)), calc(0.6 * var(--ay)));
+  }
+  20% {
+    transform: translate(var(--ax), calc(0.2 * var(--ay)));
+  }
+  30% {
+    transform: translate(calc(0.6 * var(--ax)), calc(-0.6 * var(--ay)));
+  }
+  40% {
+    transform: translate(calc(0.2 * var(--ax)), calc(-0.2 * var(--ay)));
+  }
+  50% {
+    transform: translate(0, 0);
+  }
+  60% {
+    transform: translate(calc(-0.2 * var(--ax)), calc(0.2 * var(--ay)));
+  }
+  70% {
+    transform: translate(calc(-0.6 * var(--ax)), calc(0.6 * var(--ay)));
+  }
+  80% {
+    transform: translate(calc(-1 * var(--ax)), calc(-0.2 * var(--ay)));
+  }
+  90% {
+    transform: translate(calc(-0.8 * var(--ax)), calc(-0.6 * var(--ay)));
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.3;
+  }
+}
